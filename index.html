@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Style the header */
+    header {
+        background-color: #0000FF;
+        padding: 30px;
+        text-align: center;
+        font-size: 35px;
+        color: white;
+    }
+</style>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        //function
+        function calcPrimeNumber() {
+            //reading numbers from input fields
+            var beginNum = parseInt(document.numbers.firstNum.value);
+            var endNum = parseInt(document.numbers.secondNum.value);
+
+            //array to hold prime numbers
+            var primeNumbs = new Array();
+            var ctr = beginNum;
+            //loop to store primer numbers in array
+            while (ctr <= endNum) {
+                if (isPrime(ctr) == true) {
+                    primeNumbs[primeNumbs.length] = ctr;
+                }
+                ctr = ctr + 1;
+            }
+            //if no length is zero, then no prime numbers
+            if (primeNumbs.length == 0) {
+                document.getElementById('output_content').innerHTML = "There were no prime no within the range.";
+            } else {
+                //else print prime number count and prime numbers in the range
+                var count = "<h2>Prime Numbers Count:</h2>";
+                var html = "<h2>Prime Numbers</h2>";
+                for (i = 0; i < primeNumbs.length; i++) {
+                    html += primeNumbs[i] + "<br/>";
+                }
+                document.getElementById('prime_count').innerHTML = count + "<b>" + primeNumbs.length + "</b>";
+                document.getElementById('output_content').innerHTML = "<b>" + html + "</b>";
+            }
+        }
+        //function to check the whether the number is primer or not
+        function isPrime(num) {
+            var flag = true;
+            //loop to check prime number or not
+            for (var i = 2; i <= Math.ceil(num / 2); i++) {
+                if ((num % i) == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag; //return true or false
+        }
+    </script>
+</head>
+<header><h2 align="center">IS445 Final Exam</header></h2>
+<center><h4>Find all prime numbers between two numbers</h4></center>
+<body>
+    <form name="numbers" align="center">
+        Number 1: <br>
+        <input type="text" name="firstNum" /> <br>
+        Number 2: <br>
+        <input type="text" name="secondNum" /> <br> <br>
+        <input type="button" value="Find Prime Numbers" onclick="calcPrimeNumber()" />
+    </form>
+    <form name="disp" align="center">
+        <div id="prime_count" class="text-info"></div>
+        <div id="output_content" class="text-success"></div>
+    </form>
+</body>
+
+</html>
